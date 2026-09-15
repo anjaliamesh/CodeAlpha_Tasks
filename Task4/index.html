@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="music-player">
+
+        <div class="album-container">
+            <img id="albumImage" src="images/song1.jpg" alt="Album Cover">
+        </div>
+
+        <div class="song-info">
+            <h2 id="songTitle">Song Title</h2>
+            <p id="artistName">Artist Name</p>
+        </div>
+
+        <audio id="audio"></audio>
+
+        <div class="progress-container">
+            <span id="currentTime">0:00</span>
+            <input
+                type="range"
+                id="progressBar"
+                value="0"
+                min="0"
+                max="100"
+            >
+
+            <span id="duration">0:00</span>
+        </div>
+
+        <div class="controls">
+
+            <button id="shuffleBtn">🔀</button>
+            <button id="previousBtn">⏮</button>
+            <button id="playBtn">▶</button>
+            <button id="nextBtn">⏭</button>
+            <button id="repeatBtn">🔁</button>
+
+        </div>
+
+       <div class="volume-container">
+
+    <button id="muteBtn">🔊</button>
+
+    <div class="volume-content">
+
+        <span class="volume-label">VOLUME</span>
+
+        <input
+            type="range"
+            id="volumeControl"
+            min="0"
+            max="1"
+            step="0.01"
+            value="1"
+        >
+
+    </div>
+
+</div>
+
+        <div class="playlist">
+            <h3>Playlist</h3>
+            <ul id="playlist"></ul>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

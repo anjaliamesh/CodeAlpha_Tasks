@@ -1,0 +1,454 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:radial-gradient(circle at 15% 20%,
+            rgba(137, 92, 255, 0.35),
+            transparent 35%
+        ),
+        radial-gradient(circle at 85% 80%,
+            rgba(45, 112, 255, 0.30),
+            transparent 35%
+        ),
+        linear-gradient(135deg,
+            #080b18,
+            #101633,
+            #171d43
+        );
+}
+
+.music-player {
+    width: 480px;
+    max-width: 100%;
+    padding: 38px 35px;
+    border-radius: 35px;
+    background:linear-gradient(145deg,rgba(35, 43, 95, 0.92),rgba(18, 23, 55, 0.92));
+    border: 2px solid rgba(173, 126, 255, 0.35);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 25px 70px rgba(0, 0, 0, 0.65),
+        0 0 45px rgba(126, 88, 255, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    position: relative;
+    overflow: hidden;
+}
+
+.music-player::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(164, 105, 255, 0.25);
+    filter: blur(50px);
+    pointer-events: none;
+}
+
+.music-player::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: 27px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+}
+
+.album-container {
+    width: 285px;
+    height: 285px;
+    margin: 0 auto 27px;
+    overflow: hidden;
+    border-radius: 26px;
+    position: relative;
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(145, 100, 255, 0.16);
+    transition: transform 0.8s ease;
+    background: #11162d;
+}
+
+.album-container:hover {
+    transform: scale(1.05);
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.55),
+        0 0 35px rgba(170, 110, 255, 0.35);
+}
+
+
+.album-container img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    
+}
+
+.album-container:hover img {
+    transform: scale(1.08);
+}
+
+.song-info {
+    text-align: center;
+    margin-bottom: 27px;
+}
+
+.song-info h2 {
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 7px;
+    color: #ffffff;
+}
+
+.song-info p {
+    font-size: 15px;
+    color: #b9bfdc;
+    letter-spacing: 0.5px;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    color: #bfc5df;
+    font-size: 12px;
+}
+
+#progressBar {
+    flex: 1;
+    height: 5px;
+    cursor: pointer;
+    accent-color: #a978ff;
+}
+
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    margin: 24px 0 27px;
+}
+
+
+.controls button {
+    width: 43px;
+    height: 43px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #f4f4ff;
+    font-size: 23px;
+    cursor: pointer;
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.controls button:hover {
+    transform: scale(1.15);
+    color: #c69aff;
+}
+
+#playBtn {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: none;
+    background:
+        linear-gradient(
+            135deg,
+            #8c5cff,
+            #c88cff
+        );
+    color: white;
+    font-size: 27px;
+    cursor: pointer;
+    box-shadow:
+        0 12px 30px rgba(140, 92, 255, 0.45),
+        0 0 25px rgba(180, 120, 255, 0.18);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+#playBtn:hover {
+    transform: scale(1.08);
+    box-shadow:
+        0 15px 35px rgba(140, 92, 255, 0.6),
+        0 0 30px rgba(180, 120, 255, 0.25);
+}
+
+
+#shuffleBtn {
+    font-size: 21px;
+}
+
+#shuffleBtn.active {
+    color: #c58cff;
+
+    text-shadow:
+        0 0 10px rgba(197, 140, 255, 0.9),
+        0 0 20px rgba(197, 140, 255, 0.45);
+}
+
+
+
+#repeatBtn {
+    font-size: 21px;
+}
+
+#repeatBtn.active {
+    color: #c58cff;
+    text-shadow:0 0 10px rgba(197, 140, 255, 0.9),
+        0 0 20px rgba(197, 140, 255, 0.45);
+}
+
+
+.volume-container {
+    width: 280px;
+    height: 78px;
+    margin: 5px auto 30px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 20px;
+    background:linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.14),
+            rgba(255, 255, 255, 0.045)
+        );
+
+    border: 1px solid rgba(188, 148, 255, 0.30);
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.30),
+        0 0 25px rgba(145, 95, 255, 0.12),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+#muteBtn {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(196, 157, 255, 0.30);
+    border-radius: 14px;
+    background:linear-gradient(
+            135deg,
+            rgba(156, 105, 255, 0.35),
+            rgba(104, 74, 190, 0.25)
+        );
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow:0 5px 15px rgba(100, 70, 180, 0.25);
+    transition: 0.3s ease;
+}
+
+
+#muteBtn:hover {
+    transform: translateY(-2px) scale(1.05);
+    background:linear-gradient(
+            135deg,
+            rgba(174, 119, 255, 0.50),
+            rgba(113, 80, 205, 0.40)
+        );
+    box-shadow:0 7px 20px rgba(145, 95, 255, 0.40);
+}
+
+
+#volumeControl {
+    width: 155px;
+    height: 6px;
+    cursor: pointer;
+    accent-color: #b77aff;
+}
+
+.volume-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+.volume-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #c7b8e8;
+    opacity: 0.85;
+}
+
+
+.playlist li {
+    padding: 13px 16px;
+    margin-bottom: 8px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.055);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+
+.playlist h3 {
+    text-align: center;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #ffffff;
+}
+
+.playlist ul {
+    list-style: none;
+    max-height: 190px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.track-number {
+    font-size: 12px;
+    color: #a98bd4;
+    min-width: 22px;
+}
+
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.track-details strong {
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+
+.track-details small {
+    font-size: 12px;
+    color: #aeb4d0;
+    font-weight: normal;
+}
+
+
+.playlist li:hover {
+    background: rgba(255, 255, 255, 0.11);
+    transform: translateX(4px);
+}
+
+
+.playlist li.active {
+    background:
+        linear-gradient(135deg,
+            rgba(137, 91, 220, 0.85),
+            rgba(94, 73, 177, 0.85)
+        );
+
+    box-shadow: 0 8px 25px rgba(90, 65, 180, 0.25);
+}
+
+.playlist ul::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+.playlist ul::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.playlist ul::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+
+    border-radius: 10px;
+}
+
+
+.playlist ul::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .music-player {
+        width: 100%;
+
+        padding: 25px 18px;
+
+        border-radius: 26px;
+    }
+
+    .album-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    .song-info h2 {
+        font-size: 22px;
+    }
+
+    .controls {
+        gap: 14px;
+    }
+
+    .controls button {
+        width: 40px;
+        height: 40px;
+
+        font-size: 21px;
+    }
+
+    #playBtn {
+        width: 64px;
+        height: 64px;
+    }
+
+    .volume-container {
+        width: 250px;
+        height: 72px;
+
+        padding: 10px 15px;
+    }
+
+    #volumeControl {
+        width: 135px;
+    }
+}
